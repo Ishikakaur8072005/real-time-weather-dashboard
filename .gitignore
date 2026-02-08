@@ -1,0 +1,39 @@
+# Environment and sensitive files
+.env
+config.php
+
+# Database
+*.sql.backup
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+error_log
+access_log
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# PHP
+vendor/
+composer.lock
+
+# Backup files
+*.bak
+*.backup
+*~

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Weather Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-weather {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .input-container {
+            margin: 20px;
+            position: relative;
+            display: flex;
+            width: 100%;
+        }
+
+        .city-input {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 99px;
+            border: 2px solid #ccc;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .weather-icon {
+            font-size: 80px;
+            margin: 20px 0;
+        }
+
+        .weather-info h1 {
+            font-size: 64px;
+            color: #F7C84B;
+            margin: 10px;
+        }
+
+        .weather-info p {
+            font-size: 16px;
+            color: #888;
+        }
+
+        .weather-info .condition {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .weather-info .rain {
+            color: #4A90E2;
+        }
+
+        .location p {
+            background-color: #F7C84B;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin-top: 10px;
+        }
+
+        .highlights {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-card {
+            background-color: #E0E7F4;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .highlight-card p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .highlight-card h3 {
+            font-size: 32px;
+            color: #333;
+        }
+
+        .weekly-forecast {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .forecast-card {
+            text-align: center;
+            flex: 1;
+        }
+
+        .forecast-card p {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .forecast-card h3 {
+            color: #4A90E2;
+            font-size: 20px;
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            display: none;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-weather {
+                padding: 10px;
+            }
+
+            .weather-info h1 {
+                font-size: 48px;
+            }
+
+            .highlight-card h3 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="main-weather">
+            <div class="input-container">
+                <input type="text" class="city-input" placeholder="Enter city name" aria-label="City Name">
+                <button class="search-btn" onclick="getWeatherData(document.querySelector('.city-input').value)">
+                    🔍
+                </button>
+            </div>
+
+            <div id="error-message" style="color: red; margin-top: 10px; display: none;"></div>
+
+            <div class="weather-info">
+                <div class="weather-icon" id="weather-icon">🌤️</div>
+                <h1 id="temperature">--</h1>
+                <p class="condition" id="condition">Condition: --</p>
+                <p class="rain" id="rain-chance">Rain Chance: --</p>
+                <div class="location">
+                    <p id="location">Location: --</p>
+                </div>
+            </div>
+
+            <div class="loader"></div>
+
+            <div class="highlights">
+                <div class="highlight-card">
+                    <p>Wind Speed</p>
+                    <h3 id="wind-speed">--</h3>
+                </div>
+                <div class="highlight-card">
+                    <p>Humidity</p>
+                    <h3 id="humidity">--</h3>
+                </div>
+                <div class="highlight-card">
+                    <p>Visibility</p>
+                    <h3 id="visibility">--</h3>
+                </div>
+                <div class="highlight-card">
+                    <p>Pressure</p>
+                    <h3 id="pressure">--</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLoader() {
+            document.querySelector('.loader').style.display = 'block';
+        }
+
+        function hideLoader() {
+            document.querySelector('.loader').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.style.display = 'block';
+            errorDiv.textContent = message;
+        }
+
+        function hideError() {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.style.display = 'none';
+        }
+
+        function getWeatherIcon(condition) {
+            const conditionLower = condition.toLowerCase();
+            if (conditionLower.includes('sunny') || conditionLower.includes('clear')) return '☀️';
+            if (conditionLower.includes('cloud')) return '☁️';
+            if (conditionLower.includes('rain') || conditionLower.includes('drizzle')) return '🌧️';
+            if (conditionLower.includes('thunder') || conditionLower.includes('storm')) return '⛈️';
+            if (conditionLower.includes('snow')) return '❄️';
+            if (conditionLower.includes('mist') || conditionLower.includes('fog')) return '🌫️';
+            if (conditionLower.includes('partly')) return '⛅';
+            return '🌤️';
+        }
+
+        function updateUI(data) {
+            document.getElementById('temperature').textContent = `${data.temperature}°C`;
+            document.getElementById('condition').textContent = `Condition: ${data.CONDITIONs}`;
+            document.getElementById('rain-chance').textContent = `Rain Chance: ${data.rain_chance}%`;
+            document.getElementById('location').textContent = `Location: ${data.city_name}`;
+            document.getElementById('wind-speed').textContent = `${data.wind_speed} km/h`;
+            document.getElementById('humidity').textContent = `${data.humidity}%`;
+            document.getElementById('visibility').textContent = `${data.visibility} km`;
+            document.getElementById('pressure').textContent = `${data.pressure} hPa`;
+            document.getElementById('weather-icon').textContent = getWeatherIcon(data.CONDITIONs);
+        }
+
+        function getWeatherData(city) {
+            if (!city) {
+                showError("Please enter a city name");
+                return;
+            }
+            hideError();  // Hide previous errors when starting a new request
+            showLoader();
+
+            const xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener('readystatechange', function () {
+                if (this.readyState === this.DONE) {
+                    hideLoader();
+                    if (this.status === 200) {
+                        try {
+                            const response = JSON.parse(this.responseText);
+                            if (response.error) {
+                                showError(response.error);  // Display error from server
+                            } else {
+                                updateUI(response);
+                            }
+                        } catch (e) {
+                            console.error("Invalid JSON response", e);
+                            showError("Failed to parse server response. Please try again.");
+                        }
+                    } else {
+                        showError('Error fetching weather data. Please try again.');
+                    }
+                }
+            });
+
+            xhr.open('POST', 'insert_weather.php');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send(`city_name=${encodeURIComponent(city)}`);
+        }
+
+        // Add Enter key support for search
+        document.addEventListener('DOMContentLoaded', function () {
+            const cityInput = document.querySelector('.city-input');
+            cityInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    getWeatherData(this.value);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
