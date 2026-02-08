@@ -1,4 +1,4 @@
-# Real-Time Weather Dashboard 🌤️
+# Real-Time Weather Dashboard
 
 A dynamic weather dashboard that fetches real-time weather data from RapidAPI and displays it in a clean, user-friendly interface. Built for the Postman API Hackathon.
 
@@ -6,21 +6,17 @@ A dynamic weather dashboard that fetches real-time weather data from RapidAPI an
 ![PHP](https://img.shields.io/badge/PHP-7.4+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-## ✨ Features
+## Features
 
-- 🌍 **Real-Time Weather Data** - Fetches live weather information from RapidAPI WeatherAPI
-- 🎨 **Clean UI** - Modern, responsive design with weather-specific icons
-- 💾 **Smart Caching** - Stores weather data in MySQL database with 1-hour cache
-- ⚡ **Fast Response** - Returns cached data for recent searches to improve performance
-- 🔍 **Easy Search** - Search by city name with Enter key support
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
-- 🛡️ **Error Handling** - Comprehensive error messages for better user experience
+- **Real-Time Weather Data** - Fetches live weather information from RapidAPI WeatherAPI
+- **Clean UI** - Modern, responsive design with weather-specific icons
+- **Smart Caching** - Stores weather data in MySQL database with 1-hour cache
+- **Fast Response** - Returns cached data for recent searches to improve performance
+- **Easy Search** - Search by city name with Enter key support
+- **Responsive Design** - Works seamlessly on desktop and mobile devices
+- **Error Handling** - Comprehensive error messages for better user experience
 
-## 🖼️ Screenshots
-
-![Weather Dashboard Interface](./screenshots/dashboard.png)
-
-## 🚀 Technologies Used
+## Technologies Used
 
 ### Frontend
 - **HTML5** - Structure and semantic markup
@@ -38,7 +34,7 @@ A dynamic weather dashboard that fetches real-time weather data from RapidAPI an
 - **Postman** - API testing and development
 - **Git** - Version control
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -47,7 +43,7 @@ Before you begin, ensure you have the following installed:
 - A web server (Apache/Nginx) or PHP built-in server
 - RapidAPI account with WeatherAPI access
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the Repository
 
@@ -134,14 +130,14 @@ Open your browser and navigate to:
 http://localhost:8000/Final.html
 ```
 
-## 📖 Usage
+## Usage
 
 1. **Search for Weather**: Enter a city name in the search box
 2. **Press Enter or Click Search**: The app will fetch current weather data
 3. **View Results**: See temperature, conditions, humidity, wind speed, visibility, and pressure
 4. **Cached Results**: Recent searches (within 1 hour) return instantly from cache
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 real-time-weather-dashboard/
@@ -157,14 +153,14 @@ real-time-weather-dashboard/
 └── .gitignore                  # Git ignore rules
 ```
 
-## 🔐 Security Notes
+## Security Notes
 
 - Never commit your `.env` file to version control
 - The `.env.example` file is provided as a template only
 - Keep your RapidAPI key secure and don't share it publicly
 - Use environment variables for sensitive configuration
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### "Database connection failed"
 - Verify MySQL is running
@@ -181,7 +177,7 @@ real-time-weather-dashboard/
 - Add your RapidAPI key to the `.env` file
 - The app falls back to random data for testing purposes
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -191,26 +187,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👤 Author
-
-**Ishika Kaur**
-- GitHub: [@Ishikakaur8072005](https://github.com/Ishikakaur8072005)
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [RapidAPI](https://rapidapi.com/) for providing the weather API
 - [WeatherAPI](https://www.weatherapi.com/) for reliable weather data
 - [Postman](https://www.postman.com/) for API testing tools
 - Built for the Postman API Hackathon
-
-## 📞 Support
-
-If you have any questions or run into issues, please open an issue on GitHub.
-
----
-
-**Made with ❤️ for the Postman API Hackathon**
