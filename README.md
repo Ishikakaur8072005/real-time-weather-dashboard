@@ -2,10 +2,6 @@
 
 A dynamic weather dashboard that fetches real-time weather data from RapidAPI and displays it in a clean, user-friendly interface. Built for the Postman API Hackathon.
 
-![Weather Dashboard](https://img.shields.io/badge/Status-Active-success)
-![PHP](https://img.shields.io/badge/PHP-7.4+-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-
 ## Features
 
 - **Real-Time Weather Data** - Fetches live weather information from RapidAPI WeatherAPI
